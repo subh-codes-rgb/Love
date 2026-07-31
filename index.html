@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Story | Coco & Halwai ❤️</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        cinzel: ['"Cinzel Decorative"', 'cursive'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #050507;
+            color: #f4f4f5;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Styles */
+        .glass-card {
+            background: rgba(18, 18, 24, 0.65);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            border-color: rgba(244, 114, 182, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(244, 114, 182, 0.25);
+        }
+
+        /* Glow effects */
+        .glow-rose {
+            box-shadow: 0 0 50px -10px rgba(244, 114, 182, 0.3);
+        }
+        .glow-sky {
+            box-shadow: 0 0 50px -10px rgba(56, 189, 248, 0.3);
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050507;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #27272a;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f472b6;
+        }
+    </style>
+</head>
+<body class="selection:bg-rose-500/30 selection:text-rose-200">
+
+    <!-- Canvas for Floating Particle Hearts -->
+    <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-40"></canvas>
+
+    <!-- INTRO OVERLAY -->
+    <div id="introBlinder" class="fixed inset-0 bg-black z-[100] flex flex-col items-center justify-center gap-4 transition-opacity duration-700">
+        <h1 class="font-cinzel text-3xl md:text-5xl text-rose-300 animate-pulse text-center px-4 tracking-wider">
+            Coco & Halwai
+        </h1>
+        <p class="text-xs text-zinc-500 uppercase tracking-[0.3em]">Preparing Our Experience...</p>
+    </div>
+
+    <!-- MAIN SCROLL CONTENT -->
+    <main id="mainContent" class="opacity-0 transition-opacity duration-1000 relative z-10 w-full">
+
+        <!-- ****************** SECTION 1: HERO ****************** -->
+        <section id="hero" class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-4 py-12">
+            
+            <!-- Hero Ambient Glow Spheres -->
+            <div class="absolute top-1/4 left-1/4 w-96 h-96 bg-rose-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+            <div class="absolute bottom-1/4 right-1/4 w-96 h-96 bg-sky-600/15 rounded-full blur-[120px] pointer-events-none"></div>
+
+            <!-- Hero Background Image -->
+            <img src="Photo1.jpg" id="heroBg" class="absolute inset-0 w-full h-full object-cover opacity-20 blur-md scale-105" alt="Background">
+
+            <!-- Hero Content -->
+            <div class="relative z-10 text-center flex flex-col items-center gap-6 max-w-3xl">
+                
+                <span class="px-4 py-1.5 rounded-full bg-rose-500/10 border border-rose-500/20 text-rose-300 text-xs tracking-widest uppercase font-semibold">
+                    The Chaotic Love(maybeeee) Story
+                </span>
+
+                <h1 id="mainTitle" class="font-cinzel text-5xl sm:text-7xl md:text-8xl text-white font-black tracking-tight drop-shadow-2xl">
+                    <span class="bg-gradient-to-r from-rose-300 via-rose-400 to-pink-500 bg-clip-text text-transparent">Coco</span> 
+                    <span class="text-amber-200/80 font-sans font-light">&</span> 
+                    <span class="bg-gradient-to-r from-sky-300 via-sky-400 to-indigo-400 bg-clip-text text-transparent">Halwai</span>
+                </h1>
+                
+                <p id="subTitle" class="text-lg sm:text-2xl text-zinc-300 font-light tracking-wide max-w-xl">
+                    A journey of us together ❤️
+                </p>
+                
+                <!-- BUBU & DUDU SIDE-BY-SIDE WITH AMBIENT GLOW -->
+                <div id="heroBubuDudu" class="mt-6 flex items-center justify-center gap-6">
+                    <div class="group relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-rose-500 to-pink-500 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
+                        <img src="bubu.jpg" class="relative w-32 sm:w-40 h-32 sm:h-40 rounded-2xl object-cover shadow-2xl transform -rotate-3 group-hover:rotate-0 transition duration-300" alt="Bubu">
+                        <span class="absolute -top-2 -left-2 bg-rose-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">HALWAI</span>
+                    </div>
+
+                    <span class="text-3xl text-rose-400 animate-pulse">✨</span>
+
+                    <div class="group relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-sky-500 to-blue-500 rounded-2xl blur opacity-30 group-hover:opacity-100 transition duration-500"></div>
+                        <img src="dudu.jpg" class="relative w-32 sm:w-40 h-32 sm:h-40 rounded-2xl object-cover shadow-2xl transform rotate-3 group-hover:rotate-0 transition duration-300" alt="Dudu">
+                        <span class="absolute -top-2 -right-2 bg-sky-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-full shadow">COCO</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Scroll Indicator -->
+            <div class="absolute bottom-8 left-1/2 -translate-x-1/2 text-zinc-400 text-xs font-semibold tracking-widest uppercase flex flex-col items-center gap-2">
+                <span>Scroll To Explore</span>
+                <div class="w-5 h-9 rounded-full border-2 border-zinc-600 flex justify-center p-1">
+                    <div class="w-1 h-2 bg-rose-400 rounded-full animate-bounce"></div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ****************** SECTION 2: PHOTO GALLERY ****************** -->
+        <section class="min-h-screen w-full py-28 px-4 md:px-10 space-y-20 max-w-7xl mx-auto">
+            
+            <div class="text-center space-y-3">
+                <p class="text-rose-400 text-xs uppercase tracking-[0.3em] font-semibold">Moments Preserved In Time</p>
+                <h2 class="font-cinzel text-4xl md:text-6xl text-white font-bold">Our Highlights</h2>
+            </div>
+
+            <!-- Photos Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+                
+                <!-- Photo 1 -->
+                <div class="glass-card group p-5 rounded-3xl cursor-pointer" onclick="openLightbox('Photo1.jpg', 'Scene 01: Where it all began')">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900 relative">
+                        <img src="Photo1.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 1">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-xs px-3 py-1 rounded-full border border-white/10">01</span>
+                    </div>
+                    <div class="pt-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-xl font-bold text-rose-300">The Sparks</h3>
+                            <p class="text-xs text-zinc-400 mt-1">Where our journey first started taking shape.</p>
+                        </div>
+                        <span class="text-rose-400 text-xl group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
+
+                <!-- Photo 2 -->
+                <div class="glass-card group p-5 rounded-3xl cursor-pointer" onclick="openLightbox('Photo2.jpg', 'Scene 02: Favorite Memories')">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900 relative">
+                        <img src="Photo2.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 2">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-xs px-3 py-1 rounded-full border border-white/10">02</span>
+                    </div>
+                    <div class="pt-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-xl font-bold text-sky-300">Endless Smiles</h3>
+                            <p class="text-xs text-zinc-400 mt-1">Our first movie date and I messed up maybe.</p>
+                        </div>
+                        <span class="text-sky-400 text-xl group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
+
+                <!-- Photo 3 (Full Width Hero Photo) -->
+                <div class="glass-card group p-5 rounded-3xl cursor-pointer md:col-span-2" onclick="openLightbox('Photo3.jpg', 'Scene 03: The Big Scene')">
+                    <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-900 relative">
+                        <img src="Photo3.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 3">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-xs px-3 py-1 rounded-full border border-white/10">03</span>
+                    </div>
+                    <div class="pt-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-2xl font-bold text-amber-200">The Golden Highlight</h3>
+                            <p class="text-sm text-zinc-400 mt-1">She's so pretyyyy.</p>
+                        </div>
+                        <span class="text-amber-200 text-xl group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
+
+                <!-- Photo 4 -->
+                <div class="glass-card group p-5 rounded-3xl cursor-pointer" onclick="openLightbox('Photo4.jpg', 'Scene 04: Pure Happiness')">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900 relative">
+                        <img src="Photo4.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 4">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+                        <span class="absolute top-4 left-4 bg-black/50 backdrop-blur-md text-xs px-3 py-1 rounded-full border border-white/10">04</span>
+                    </div>
+                    <div class="pt-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-xl font-bold text-rose-300">Comfort & Chaos</h3>
+                            <p class="text-xs text-zinc-400 mt-1">Feeling completely at home around you.</p>
+                        </div>
+                        <span class="text-rose-400 text-xl group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
+
+                <!-- Photo 5 -->
+                <div class="glass-card group p-5 rounded-3xl cursor-pointer" onclick="openLightbox('Photo5.jpg', 'Scene 05: Adventures')">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-900 relative">
+                        <img src="Photo5.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 5">
+                    </div>
+                    <div class="pt-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-xl font-bold text-sky-300">The Adventures</h3>
+                            <p class="text-xs text-zinc-400 mt-1">Teaching her to become a rider.</p>
+                        </div>
+                        <span class="text-sky-400 text-xl group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
+
+                <!-- Photo 6 (Wide Card) -->
+                <div class="glass-card group p-5 rounded-3xl cursor-pointer md:col-span-2" onclick="openLightbox('Photo6.jpg', 'Scene 06: Magic')">
+                    <div class="aspect-[16/9] rounded-2xl overflow-hidden bg-zinc-900 relative">
+                        <img src="Photo6.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 6">
+                    </div>
+                    <div class="pt-4 flex justify-between items-end">
+                        <div>
+                            <h3 class="text-2xl font-bold text-purple-300">Magic In Everyday</h3>
+                            <p class="text-sm text-zinc-400 mt-1">First Fest with You!</p>
+                        </div>
+                        <span class="text-purple-300 text-xl group-hover:translate-x-1 transition-transform">→</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ****************** SECTION 3: GRAND FINALE ****************** -->
+        <section class="min-h-screen w-full flex flex-col items-center justify-center gap-12 py-24 px-4 text-center relative">
+            
+            <div class="space-y-4 max-w-2xl">
+                <span class="text-rose-400 text-xs font-semibold uppercase tracking-[0.3em]">To The Moon & Back</span>
+                <h2 class="font-cinzel text-5xl md:text-7xl text-white font-bold">To Be Continued...</h2>
+                <p class="text-zinc-400 text-base md:text-lg font-light">This is just the beginning of our chaos and peace.</p>
+            </div>
+
+            <!-- Photos 7 & 8 Showcases -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-8 w-full max-w-5xl px-4">
+                <div class="glass-card group p-4 rounded-3xl cursor-pointer" onclick="openLightbox('Photo7.jpg', 'Closing Scene 07')">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+                        <img src="Photo7.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 7">
+                    </div>
+                </div>
+                <div class="glass-card group p-4 rounded-3xl cursor-pointer" onclick="openLightbox('Photo8.jpg', 'Closing Scene 08')">
+                    <div class="aspect-[4/3] rounded-2xl overflow-hidden">
+                        <img src="Photo8.jpg" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="Photo 8">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Interactive Love Note Button -->
+            <button onclick="openNote()" class="mt-8 group relative px-8 py-4 rounded-full bg-gradient-to-r from-rose-500 to-pink-600 text-white font-semibold text-lg shadow-2xl shadow-rose-500/40 hover:scale-105 active:scale-95 transition-all flex items-center gap-3">
+                <span>Read Secret Message</span>
+                <span class="group-hover:rotate-12 transition-transform">💌</span>
+            </button>
+
+            <!-- Footer Bubu & Dudu -->
+            <div class="flex items-center justify-center gap-4 pt-12">
+                <img src="bubu.jpg" class="w-14 h-14 rounded-full object-cover border-2 border-rose-400/60 shadow-lg glow-rose" alt="Bubu">
+                <span class="text-rose-400 text-xl animate-pulse">❤️</span>
+                <img src="dudu.jpg" class="w-14 h-14 rounded-full object-cover border-2 border-sky-400/60 shadow-lg glow-sky" alt="Dudu">
+            </div>
+
+        </section>
+
+    </main>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 bg-black/90 backdrop-blur-xl z-[150] opacity-0 pointer-events-none transition-all duration-300 flex flex-col items-center justify-center p-4">
+        <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl hover:text-rose-400 transition-colors">✕</button>
+        <img id="lightboxImg" src="" class="max-w-full max-h-[80vh] rounded-2xl shadow-2xl object-contain border border-white/10" alt="Zoomed Scene">
+        <p id="lightboxCaption" class="mt-4 text-zinc-300 font-cinzel text-lg tracking-wide"></p>
+    </div>
+
+    <!-- SECRET LOVE NOTE MODAL -->
+    <div id="noteModal" class="fixed inset-0 bg-black/80 backdrop-blur-md z-[160] opacity-0 pointer-events-none transition-all duration-300 flex items-center justify-center p-4">
+        <div class="bg-zinc-900 border border-rose-500/30 p-8 rounded-3xl max-w-lg w-full text-center space-y-6 relative shadow-2xl glow-rose">
+            <button onclick="closeNote()" class="absolute top-4 right-4 text-zinc-400 hover:text-white">✕</button>
+            <span class="text-4xl">💌</span>
+            <h3 class="font-cinzel text-3xl text-rose-300 font-bold">To My Dearest Coco</h3>
+            <p class="text-zinc-300 text-sm leading-relaxed font-light">
+                Happy Girlfriend's Day! Thank you for filling every single day with your warmth, your smile, and your sweetness. Life is so much brighter with you by my side. Here is to endless more chapters together! and haa jodi konodin amaye accept korte paris ektu...heheheh..Khushhh rehhh cutieee
+            </p>
+            <p class="font-cinzel text-rose-400 font-bold">Forever & Always, Halwai ❤️</p>
+        </div>
+    </div>
+
+    <!-- SCRIPT -->
+    <script>
+        // --- 1. Page Reveal Engine ---
+        function revealPage() {
+            const blinder = document.getElementById('introBlinder');
+            const mainContent = document.getElementById('mainContent');
+            if (blinder && mainContent) {
+                blinder.style.opacity = '0';
+                setTimeout(() => {
+                    blinder.style.display = 'none';
+                    mainContent.style.opacity = '1';
+                }, 500);
+            }
+        }
+        window.addEventListener('load', revealPage);
+        setTimeout(revealPage, 1000);
+
+        // --- 2. Lightbox Logic ---
+        function openLightbox(src, caption) {
+            const lb = document.getElementById('lightbox');
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightboxCaption').textContent = caption;
+            lb.classList.remove('opacity-0', 'pointer-events-none');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // --- 3. Love Note Modal Logic ---
+        function openNote() {
+            document.getElementById('noteModal').classList.remove('opacity-0', 'pointer-events-none');
+        }
+        function closeNote() {
+            document.getElementById('noteModal').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        // --- 4. Floating Hearts Canvas Background ---
+        const canvas = document.getElementById('particleCanvas');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        });
+
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * w;
+                this.y = h + Math.random() * 100;
+                this.size = Math.random() * 3 + 1;
+                this.speedY = Math.random() * 1 + 0.5;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y -= this.speedY;
+                if (this.y < -10) this.reset();
+            }
+            draw() {
+                ctx.fillStyle = `rgba(244, 114, 182, ${this.opacity})`;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
+
+        const particles = Array.from({ length: 45 }, () => new Particle());
+        function renderParticles() {
+            ctx.clearRect(0, 0, w, h);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(renderParticles);
+        }
+        renderParticles();
+
+        // --- 5. Entrance GSAP Animations ---
+        try {
+            if (typeof gsap !== 'undefined') {
+                gsap.from("#mainTitle", { y: 50, opacity: 0, duration: 1.2, delay: 0.3 });
+                gsap.from("#subTitle", { y: 30, opacity: 0, duration: 1, delay: 0.5 });
+                gsap.from("#heroBubuDudu", { scale: 0.8, opacity: 0, duration: 1.2, delay: 0.7 });
+            }
+        } catch (e) { console.log(e); }
+    </script>
+</body>
+</html>
